@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+    .login-form {
+        width: 340px;
+        margin: 50px auto;
+          font-size: 15px;
+    }
+    .login-form form {
+        margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {        
+        font-size: 15px;
+        font-weight: bold;
+    }
+    label {
+        display: block;
+    }
+    </style>
+
+    <div class="login-form">
+        <form method="POST" action="">
+            {% csrf_token %}
+            <h2 class="text-center">Register</h2>
+            <div class="form-group">
+                <label for="username">Username</label>
+                {{form.username}}
+            </div>
+            <div class="form-group">
+                <label for="username">Email</label>
+                {{form.email}}
+            </div>
+            <div class="form-group">
+                <label for="username">Password</label>
+                {{form.password1}}
+            </div>
+            <div class="form-group">
+                <label for="username">Confrim Password</label>
+                {{form.password2}}
+            </div>
+            <input type="submit" name="create User" class="btn btn-primary btn-block">
+        </form>
+        <p class="text-center">Already signed up? <a href="{% url 'login' %}" class="btn btn-primary btn-block">Log In</a> </p>        
+    </div>
+
+
+
+{% endblock content %}
