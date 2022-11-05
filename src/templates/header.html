@@ -20,7 +20,7 @@
                         </div>
                         <!-- Top Header Meta -->
                         <div class="top-header-meta">
-                            <a href="mailto:destinyfaithministries@gmail.com" class="email-address"><i class="fa fa-envelope" aria-hidden="true"></i> <span>destinyfaithministries</span></a>
+                            <a href="mailto:thikatownparish@gmail.com" class="email-address"><i class="fa fa-envelope" aria-hidden="true"></i> <span>destinyfaithministries</span></a>
                             <a href="#" class="phone"><i class="fa fa-phone" aria-hidden="true"></i> <span>612-306-9859</span></a>
                         </div>
                     </div>
@@ -59,33 +59,32 @@
                                 <li><a href="{% url 'index' %}">Home</a></li>
                                 <li><a href="{% url 'events' %}">Events</a></li>
                                 <li><a href="{% url 'sermons' %}">Sermons</a></li>
-                                <li><a>Ministries</a>
-                                    <div class="dropdown">
-                                        <ul class="single-mega cn-col-4">
-                                            <li><a href="youth.html">Youth Ministry</a></li>
-                                            <li><a href="youth.html">Children Ministry</a></li>
-                                            <li><a href="youth.html">Mens Ministry</a></li>
-                                            <li><a href="youth.html">Women Ministry</a></li>
-                                            <li><a href="youth.html">Bible Study</a></li>
-                                            <li><a href="youth.html">Midweek Study</a></li>
-                                            <li><a href="youth.html">Morning Devotion</a></li>
-                                        </ul>
-                                    </div>
+                                <li><a href="{% url 'about' %}">About</a></li>
+                                <li><a href="{% url 'contact' %}">Contact</a></li>
+                                <li class="nav-item dropdown" data-toggle="dropdown">
+                                    <a class="nav-link px-3 dropdown-toggle" href="#">Ministries</a>
+                                    <div class="dropdown-menu">
+                                        <a href="{% url 'youth-page' %}"  onclick="window.location.href=`{% url 'youth-page' %}`" class="dropdown-item">Youth Ministries</a>
+                                        <a href="{% url 'youth-page' %}"  onclick="window.location.href=`{% url 'men-page' %}`" class="dropdown-item">Men Ministries</a>
+                                        <a href="{% url 'youth-page' %}"  onclick="window.location.href=`{% url 'women-page' %}`"  class="dropdown-item">Women Ministries</a>
+                                        <a href="{% url 'youth-page' %}"  onclick="window.location.href=`{% url 'children-page' %}`" class="dropdown-item">Children Ministries</a>
+                                        <a href="{% url 'youth-page' %}"  onclick="window.location.href=`{% url 'bible-study' %}`" class="dropdown-item">Bible Study</a>
+                                        <a href="{% url 'youth-page' %}"  onclick="window.location.href=`{% url 'midweek-study' %}`" class="dropdown-item">Midweek Study</a>
+                                        <a href="{% url 'youth-page' %}"  onclick="window.location.href=`{% url 'morning-devotion' %}`" class="dropdown-item">Morning Devotion</a>
+                                    </div>    
                                 </li>
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="contact.html">Contact</a></li>
                             </ul>
 
                             <!-- Search Button -->
                             <div id="header-search"><i class="fa fa-search" aria-hidden="true"></i></div>
 
-                            <!-- Donate Button -->
+                            <!-- Donate Button -->   
                             {% if request.user.is_authenticated %}
                             Logged in as: {{ request.user.username }}
                             <a href="{% url 'logout' %}" class="ml-3 btn crose-btn header-btn">Log out</a>
                             {% else %}
                             <a href="{% url 'login' %}" class="btn crose-btn header-btn">Log in</a>
-                            {% endif %} 
+                            {% endif %}                        
 
                         </div>
                         <!-- Nav End -->

@@ -18,22 +18,12 @@
                         <p><i class="fa fa-clock-o" aria-hidden="true"></i> {{ event.date }}</span></p>
                         <p><i class="fa fa-clock-o" aria-hidden="true"></i> {{ event.time }}</span></p>
                     </div>
-                    <div class="sermons-cata">
-                        <a href="#" data-toggle="tooltip" data-placement="top" title="Video"><i class="fa fa-video-camera" aria-hidden="true"></i></a>
-                        <a href="#" data-toggle="tooltip" data-placement="top" title="Audio"><i class="fa fa-headphones" aria-hidden="true"></i></a>
-                        <a href="#" data-toggle="tooltip" data-placement="top" title="Docs"><i class="fa fa-file" aria-hidden="true"></i></a>
-                        <a href="#" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
-                    </div>
                     <p>{{ event.overview }}</p>
                     <div class="read-more-share d-flex flex-wrap justify-content-between">
                         <!-- Share -->
-                        <div class="share">
-                            <span>Share:</span>
-                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                        <div>
+                            <a href="{% url 'event-update' id=event.id %}">Update</a>
+                            <a href="{% url 'event-delete' id=event.id %}">Delete</a>
                         </div>
                     </div>
                 </div>

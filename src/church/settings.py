@@ -40,7 +40,10 @@ INSTALLED_APPS = [
 
     'chuch',
     'tinymce',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'Bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -136,8 +139,6 @@ AUTH_USER_MODEL = 'chuch.User'
 
 #tinymce
 TINYMCE_DEFAULT_CONFIG = {
-    'height': 360,
-    'width': 1120,
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 20,
     'theme': 'silver',

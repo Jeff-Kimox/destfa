@@ -12,6 +12,9 @@
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Sermons</li>
                         </ol>
+                        {% if request.user.is_staff %}
+                        <a href="{% url 'sermon-create' %}">Create a sermon</a>
+                        {% endif %}
                     </nav>
                 </div>
             </div>

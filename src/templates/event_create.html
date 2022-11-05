@@ -4,12 +4,13 @@
 {% block content %}
 
 <div class="col-4 offset-4 mb-5 mt-5">
-    <form method="post" action="*">
+    <h3>{{ title }} AN EVENT</h3>
+    {{ form.media }}
+    <form method="POST" action="." enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
-    <p class="text-center"> Allready registered? <a href="{% url 'login' %}" class="btn btn-primary btn-block">Login</a></p>
 </div>
 
 {% endblock content %}

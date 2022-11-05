@@ -19,21 +19,43 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, include
 from chuch import views
+from chuch.views import RegisterView
 
-from chuch.views import index, events, sermons, sermon_detail, event_detail, register_page, login_page, logoutUser
+from chuch.views import (
+    index, events, sermons, sermon_detail,
+    event_detail, register_page, login_page, logoutUser, youth_page,
+    sermon_create, sermon_update, sermon_delete, event_create, aboutPage, contantPage,
+    men_page, women_page, children_page, bible_study, midweek_study, morning_devotion
+    # event_create, event_update, event_delete
 
-
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    path('register/', views.register_page, name="register"),
+    path('register/', RegisterView.as_view(), name="register"),
+    # path('register/', views.register_page, name="register"),
     path('login/', views.login_page, name="login"),
     path('logout/', views.logoutUser, name="logout"),
     path('events/', views.events, name='events'),
+    path('youth_page/', views.youth_page, name='youth-page'),
+    path('men_page/', views.men_page, name='men-page'),
+    path('women_page/', views.women_page, name='women-page'),
+    path('children_page/', views.children_page, name='children-page'),
+    path('bible_study/', views.bible_study, name='bible-study'),
+    path('midweek_study/', views.midweek_study, name='midweek-study'),
+    path('morning_devotion/', views.morning_devotion, name='morning-devotion'),
     path('sermons/', views.sermons, name='sermons'),
+    path('sermon_create/', views.sermon_create, name='sermon-create'),
+    path('event_create/', views.event_create, name='event-create'),
     path('sermon/<id>/', views.sermon_detail, name='sermon-detail'),
+    path('sermon/<id>/update/', views.sermon_update, name='sermon-update'),
+    path('sermon/<id>/delete/', views.sermon_delete, name='sermon-delete'),
     path('event/<id>/', views.event_detail, name='event-detail'),
+    path('event/<id>/update/', views.event_update, name='event-update'),
+    path('event/<id>/delete/', views.event_delete, name='event-delete'),
+    path('about/', views.aboutPage, name='about'),
+    path('contact/', views.contantPage, name='contact'),
     path('tinymce/', include('tinymce.urls')),
 ]
 

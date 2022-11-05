@@ -11,7 +11,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item"><a href="#">Sermons</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Sermons Details</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ sermon.title }}</li>
                         </ol>
                     </nav>
                 </div>
@@ -34,12 +34,17 @@
                                 <h2 class="post-title mb-30">{{ sermon.title }}</h2>
                                 <img class="mb-30" src="{{ sermon.thumbnail.url }}" alt="">
                                 <!-- Catagory & Share -->
+                                <div>
+                                    <a href="{% url 'sermon-update' id=sermon.id %}">Update</a>
+                                    <a href="{% url 'sermon-delete' id=sermon.id %}">Delete</a>
+                                </div>
                                 <p>{{ sermon.content }}</p>
                             </div>
                         </div>
 
                         <!-- Comment Area Start -->
-                        <div class="comment_area clearfix">
+                        {% for comment in sermon_coments %}
+                        <div class="comment_area">
                             <ol>
                                 <!-- Single Comment Area -->
                                 <li class="single_comment_area">
@@ -50,19 +55,19 @@
                                         </div>
                                         <!-- Comment Content -->
                                         <div class="comment-content">
-                                            <span class="comment-date">March 15, 2018</span>
-                                            <h5>Lena Headey</h5>
-                                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore.</p>
-                                            <a href="#">Like</a>
-                                            <a href="#">Reply</a>
+                                            <span class="comment-date">{{comment.timestamp|timesince}} ago</span>
+                                            <h5>@{{comment.user.username}}</h5>
+                                            <p>{{comment.content}}</p>                                       
                                         </div>
                                     </div>
                                 </li>
                             </ol>
                         </div>
+                        {% endfor %}
 
                         <!-- Leave A Comment -->
                         <div class="leave-comment-area mt-50 clearfix">
+                            {% if request.user.is_authenticated %}
                             <div class="comment-form">
                                 <h4 class="headline">Leave A Comment</h4>
                                 <!-- Contact Form Area -->
@@ -70,33 +75,22 @@
                                     <form action="#" method="post">
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" id="contact-name" placeholder="Name">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <input type="email" class="form-control" id="contact-email" placeholder="Email">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" id="contact-number" placeholder="Website">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <button type="submit" class="btn crose-btn mt-15">Post Comment</button>
+                                                <form action="post">
+                                                    {% csrf_token %}
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <textarea class="form-control" name="body" cols="30" rows="10" placeholder="Post a comment"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <button type="submit" class="btn crose-btn mt-15">Post Comment</button>
+                                                </form>                
                                             </div>
                                         </div>
                                     </form>
                                 </div>
 
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

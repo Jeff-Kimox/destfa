@@ -1,141 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <!-- Title -->
-    <title>P.C.E.A | THIKA TOWN CHURCH</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="img/core-img/pcea_icon.png">
-
-    <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="style.css">
-
-</head>
-
-<body>
-    <!-- ##### Preloader ##### -->
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <!-- Line -->
-        <div class="line-preloader"></div>
-    </div>
-
-    <!-- ##### Header Area Start ##### -->
-    <header class="header-area">
-
-        <!-- ***** Top Header Area ***** -->
-        <div class="top-header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="top-header-content d-flex flex-wrap align-items-center justify-content-between">
-                            <!-- Top Header Meta -->
-                            <div class="top-header-meta d-flex flex-wrap">
-                                <a href="#" class="open" data-toggle="tooltip" data-placement="bottom" title="10 Am to 6 PM"><i class="fa fa-clock-o" aria-hidden="true"></i> <span>Opening Hours - 8 Am to 6 PM</span></a>
-                                <!-- Social Info -->
-                                <div class="top-social-info">
-                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                            <!-- Top Header Meta -->
-                            <div class="top-header-meta">
-                                <a href="mailto:thikatownparish@gmail.com" class="email-address"><i class="fa fa-envelope" aria-hidden="true"></i> <span>destinyfaithministries.org</span></a>
-                                <a href="#" class="phone"><i class="fa fa-phone" aria-hidden="true"></i> <span>+(254) 726 847 488</span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- ***** Top Header Area ***** -->
-
-        <!-- ***** Navbar Area ***** -->
-        <div class="crose-main-menu">
-            <div class="classy-nav-container breakpoint-off">
-                <div class="container">
-                    <!-- Menu -->
-                    <nav class="classy-navbar justify-content-between" id="croseNav">
-
-                        <!-- Nav brand -->
-                        <a href="index.html" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
-
-                        <!-- Navbar Toggler -->
-                        <div class="classy-navbar-toggler">
-                            <span class="navbarToggler"><span></span><span></span><span></span></span>
-                        </div>
-
-                        <!-- Menu -->
-                        <div class="classy-menu">
-
-                            <!-- close btn -->
-                            <div class="classycloseIcon">
-                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                            </div>
-
-                            <!-- Nav Start -->
-                            <div class="classynav">
-                                <ul>
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="events.html">Events</a></li>
-                                    <li><a href="sermons.html">Sermons</a></li>
-                                    <li><a href="#">Ministries</a>
-                                        <div class="dropdown">
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="youth.html">Youth Ministry</a></li>
-                                                <li><a href="youth.html">Children Ministry</a></li>
-                                                <li><a href="youth.html">Mens Ministry</a></li>
-                                                <li><a href="youth.html">Women Ministry</a></li>
-                                                <li><a href="youth.html">Bible Study</a></li>
-                                                <li><a href="youth.html">Midweek Study</a></li>
-                                                <li><a href="youth.html">Morning Devotion</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                </ul>
-
-                                <!-- Search Button -->
-                                <div id="header-search"><i class="fa fa-search" aria-hidden="true"></i></div>
-
-                                <!-- Donate Button -->
-                                <a href="login.html" class="btn crose-btn header-btn">Log in</a> 
-
-                            </div>
-                            <!-- Nav End -->
-                        </div>
-                    </nav>
-                </div>
-            </div>
-
-            <!-- ***** Search Form Area ***** -->
-            <div class="search-form-area">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-12">
-                            <div class="searchForm">
-                                <form action="#" method="post">
-                                    <input type="search" name="search" id="search" placeholder="Enter keywords &amp; hit enter...">
-                                    <button type="submit" class="d-none"></button>
-                                </form>
-                                <div class="close-icon" id="searchCloseIcon"><i class="fa fa-close" aria-hidden="true"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- ***** Navbar Area ***** -->
-    </header>
-    <!-- ##### Header Area End ##### -->
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
     <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
@@ -178,7 +43,7 @@
                 </div>
                 <div class="col-12 col-lg-6">
                     <div class="about-thumbnail">
-                        <img src="img/bg-img/2.jpg" alt="">
+                        <img src="{% static 'img/bg-img/2.jpg' %}" alt="">
                     </div>
                 </div>
             </div>
@@ -187,7 +52,7 @@
     <!-- ##### About Us Area End ##### -->
 
     <!-- ##### Call To Action Area Start ##### -->
-    <section class="call-to-action-area section-padding-100 bg-img bg-overlay" style="background-image: url(img/bg-img/6.jpg)">
+    <section class="call-to-action-area section-padding-100 bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/6.jpg' %})">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -219,7 +84,7 @@
                 <!-- Single Why Choose Area -->
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="single-why-choose-us mb-100">
-                        <img src="img/core-img/why1.png" alt="">
+                        <img src="{% static 'img/core-img/why1.png' %}" alt="">
                         <h4>Bringing Unity</h4>
                         <p>We bring unity all over Kenya without discriminating tribe, race, gender.All are welcomed in the house of God.</p>
                     </div>
@@ -227,7 +92,7 @@
                 <!-- Single Why Choose Area -->
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="single-why-choose-us mb-100">
-                        <img src="img/core-img/why2.png" alt="">
+                        <img src="{% static 'img/core-img/why2.png' %}" alt="">
                         <h4>Growing Together</h4>
                         <p>Growing together in Christ supporting one another in the activities we do.Helping the needy</p>
                     </div>
@@ -235,7 +100,7 @@
                 <!-- Single Why Choose Area -->
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="single-why-choose-us mb-100">
-                        <img src="img/core-img/why3.png" alt="">
+                        <img src="{% static 'img/core-img/why3.png' %}" alt="">
                         <h4>Spreading love </h4>
                         <p>Spreading love in Christ.Showing love to everyone.Loving one another</p>
                     </div>
@@ -262,7 +127,7 @@
                 <!-- Team Members Area -->
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="single-team-members text-center mb-100">
-                        <div class="team-thumb" style="background-image: url(img/bg-img/33.jpg);">
+                        <div class="team-thumb" style="background-image: url(static/img/bg-img/33.jpg);">
                             <div class="team-social-info">
                                 <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                 <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
@@ -277,7 +142,7 @@
                 <!-- Team Members Area -->
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="single-team-members text-center mb-100">
-                        <div class="team-thumb" style="background-image: url(img/bg-img/34.jpg);">
+                        <div class="team-thumb" style="background-image: url(static/img/bg-img/34.jpg);">
                             <div class="team-social-info">
                                 <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                 <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
@@ -292,7 +157,7 @@
                 <!-- Team Members Area -->
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="single-team-members text-center mb-100">
-                        <div class="team-thumb" style="background-image: url(img/bg-img/35.jpg);">
+                        <div class="team-thumb" style="background-image: url(static/img/bg-img/35.jpg);">
                             <div class="team-social-info">
                                 <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                 <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
@@ -307,7 +172,7 @@
                 <!-- Team Members Area -->
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="single-team-members text-center mb-100">
-                        <div class="team-thumb" style="background-image: url(img/bg-img/36.jpg);">
+                        <div class="team-thumb" style="background-image: url(static/img/bg-img/36.jpg);">
                             <div class="team-social-info">
                                 <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                 <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
@@ -347,117 +212,4 @@
         </div>
     </section>
     <!-- ##### Subscribe Area End ##### -->
-
-    <!-- ##### Footer Area Start ##### -->
-    <footer class="footer-area">
-        <!-- Main Footer Area -->
-        <div class="main-footer-area">
-            <div class="container">
-                <div class="row">
-
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget mb-70">
-                            <a href="#" class="footer-logo"><img src="img/core-img/logo2.png" alt=""></a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        </div>
-                    </div>
-
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget mb-70">
-                            <h5 class="widget-title">Quick Link</h5>
-                            <nav class="footer-menu">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Home</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Event</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> About Us</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Sermons</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Contact</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget mb-70">
-                            <h5 class="widget-title">News Latest</h5>
-
-                            <!-- Single Latest News -->
-                            <div class="single-latest-news">
-                                <a href="#">Visiting Children Home</a>
-                                <p><i class="fa fa-calendar" aria-hidden="true"></i> November 11, 2017</p>
-                            </div>
-
-                            <!-- Single Latest News -->
-                            <div class="single-latest-news">
-                                <a href="#">Church Games</a>
-                                <p><i class="fa fa-calendar" aria-hidden="true"></i> November 11, 2017</p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget mb-70">
-                            <h5 class="widget-title">Contact Us</h5>
-
-                            <div class="contact-information">
-                                <p><i class="fa fa-map-marker" aria-hidden="true"></i> Destiny Faith Ministries, Kenya</p>
-                                <a href="callto:001-1234-88888"><i class="fa fa-phone" aria-hidden="true"></i> 001-1234-88888</a>
-                                <a href="mailto:thikatownparish@gmail.com"><i class="fa fa-envelope" aria-hidden="true"></i> thikatownparish@gmail.com</a>
-                                <p><i class="fa fa-clock-o" aria-hidden="true"></i> Mon - Fri: 08.00am - 18.00pm</p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <!-- Copwrite Area -->
-        <div class="copywrite-area">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center flex-wrap">
-                    <!-- Copywrite Text -->
-                    <div class="col-12 col-md-6">
-                        <div class="copywrite-text">
-                          <p>
-                          &copy; Wurmtech developers 2019.<a href="https://wurmtech.com" target="_blank">Wurmtech</a>
-
-                          </p>
-                        </div>
-                    </div>
-
-                    <!-- Footer Social Icon -->
-                    <div class="col-12 col-md-6">
-                        <div class="footer-social-icon">
-                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- ##### Footer Area End ##### -->
-
-    <!-- ##### All Javascript Script ##### -->
-    <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
-    <!-- Active js -->
-    <script src="js/active.js"></script>
-</body>
-
-</html>
+{% endblock content %}

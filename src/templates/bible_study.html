@@ -10,10 +10,10 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Event</li>
+                            <li class="breadcrumb-item active" aria-current="page">Sermons</li>
                         </ol>
                         {% if request.user.is_staff %}
-                        <a href="{% url 'event-create' %}">Create an event</a>
+                        <a href="{% url 'sermon-create' %}">Create a bible study</a>
                         {% endif %}
                     </nav>
                 </div>
@@ -22,49 +22,49 @@
     </div>
     <!-- ##### Breadcrumb Area End ##### -->
 
-    <!-- ##### Events Area Start ##### -->
-    <div class="events-area section-padding-100">
+    <!-- ##### Latest Sermons Area Start ##### -->
+    <section class="latest-sermons-area">
         <div class="container">
             <div class="row">
-
-                <!-- Event Search Form -->
+                <!-- Section Heading -->
                 <div class="col-12">
-                    <div class="event-search-form mb-50">
-                        <form action="#" method="get">
-                            <div class="row align-items-end">
-                                <div class="col-12 col-md">
-                                    <div class="form-group mb-0">
-                                        <label for="eventDate">Event In</label>
-                                        <input type="date" class="form-control" id="eventDate" placeholder="Event In">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md">
-                                    <div class="form-group mb-0">
-                                        <label for="eventLocation">Near</label>
-                                        <input type="text" class="form-control" id="eventLocation" placeholder="Location">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md">
-                                    <div class="form-group mb-0">
-                                        <label for="eventKeyword">Keyword</label>
-                                        <input type="text" class="form-control" id="eventKeyword" placeholder="Typing Keyword">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-3 col-lg-2">
-                                    <button type="submit" class="btn crose-btn">Find Events</button>
-                                </div>
+                    <div class="section-heading">
+                        <h2>BIBLE STUDIES</h2>
+                        <p>Loaded with fast-paced worship, activities, and video teachings to address real issues that students face each day</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Single Latest Sermons -->
+                {% for sermon in queryset %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-latest-sermons mb-100">
+                        <div class="sermons-thumbnail">
+                            <a href="{{ sermon.get_absolute_url }}">
+                                <img src="{{ sermon.thumbnail.url }}" alt="">
+                            </a>  
+                            <!-- Date -->
+                            <!-- <div class="sermons-date">
+                                <h6><span>{{ object.comment_count }}</span></h6>
+                            </div> -->
+                        </div>
+                        <div class="sermons-content">
+                            <a href="{{ sermon.get_absolute_url }}"> 
+                                <h4>{{ sermon.title }}</h4>
+                             </a>  
+                            <div class="sermons-meta-data">
+                                <p><i class="fa fa-user" aria-hidden="true"></i> Sermon From: <span>{{ sermon.sermon_from }}</span></p>
+                                <!-- <p><i class="fa fa-tag" aria-hidden="true"></i> Categories: <span>God, Pray</span></p> -->
+                                <p><i class="fa fa-clock-o" aria-hidden="true"></i>{{ sermon.timestamp|timesince }} ago</p>
+                                <p><i class="fa fa-comments" aria-hidden="true"></i> {{ sermon.comment_count }} </p>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
 
-                <!-- Events Title -->
-                <div class="col-12">
-                    <div class="events-title">
-                        <h2>Latest Events</h2>
-                    </div>
-                </div>
-                {% include 'evet.html' %}
+                <!-- ##### Paginator ##### -->
                 <div class="col-12">
                     <div class="pagination-area mt-70">
                         <nav aria-label="Page navigation example">
@@ -80,10 +80,11 @@
                         </nav>
                     </div>
                 </div>
+               
             </div>
         </div>
-    </div>
-    <!-- ##### Events Area End ##### -->
+    </section>
+    <!-- ##### Latest Sermons Area End ##### -->
 
     <!-- ##### Subscribe Area Start ##### -->
     <section class="subscribe-area">
