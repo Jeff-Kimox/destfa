@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<br>
+<div class="container text-center bg-white p-4" style="border-radius: 20px; width: 500px;">
+    <br>
+    <h2>Donate</h2>
+    <i class="fa fa-child fa-2x" aria-hidden="true"></i> 
+    <br>
+    {{donation.title}}!
+    <hr>
+
+    <i class="fa fa-heart fa-3x text-danger" aria-hidden="true"></i>
+    <br> <br>
+    <p>Feel free to send a donation....</p>
+    <hr>
+    <!--paypal button container-->
+    <div id="paypal-button-container">
+
+    </div>
+    <!--stripe button container-->
+    <button id="stripe-checkout" type="submit" class="btn btn-info text-white w-100"> <i class="fa fa-credit-card" aria-hidden=""></i> &nbsp; Pay With Stripe</button>
+    <br> <br> 
+</div>
+<!--paypal js1-->
+<script src="https://www.paypal.com/sdk/js?client-id=AXgKdt-3z6b7SYaMOMq0JmzJcR2N5jQfIHu3KfpeaRvEqn1ji6j8MmCFW2P_H6BjZqau1Fs2EKU2E7AO&currency=USD&intent=capture&enable-funding=venmo" data-sdk-integration-source="integrationbuilder"></script>
+
+<!--paypal js2-->
+<script>
+
+    var total = '{{donation.amount}}';
+
+    const paypalButtonsComponent = paypal.Buttons({
+        // optional styling for buttons
+        // https://developer.paypal.com/docs/checkout/standard/customize/buttons-style-guide/
+        style: {
+          color: "silver",
+          shape: "pill",
+          layout: "vertical"
+        },
+
+        // set up the transaction
+        createOrder: (data, actions) => {
+            // pass in any options from the v2 orders create call:
+            // https://developer.paypal.com/api/orders/v2/#orders-create-request-body
+            const createOrderPayload = {
+                purchase_units: [
+                    {
+                        amount: {
+                            value: total
+                        }
+                    }
+                ]
+            };
+
+            return actions.order.create(createOrderPayload);
+        },
+
+        // finalize the transaction
+        onApprove: (data, actions) => {
+            const captureOrderHandler = (details) => {
+                const payerName = details.payer.name.given_name;
+                console.log('Transaction completed');
+
+                window.location.replace("{% url 'payment-succesful' %}")
+            };
+
+            return actions.order.capture().then(captureOrderHandler);
+        },
+
+        // handle unrecoverable errors
+        onError: (err) => {
+            console.error('An error prevented the buyer from checking out with PayPal');
+
+            window.location.replace("{% url 'payment-failed' %}")
+        }
+    });
+
+    paypalButtonsComponent
+        .render("#paypal-button-container")
+        .catch((err) => {
+            console.error('PayPal Buttons failed to render');
+        });
+  </script>
+
+  <!--stripe js1-->
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <!--stripe js2-->
+
+  <script>
+
+    var stripe_public_key = Stripe('{{ stripe_public_key }}');
+
+    const pay_now_button = document.querySelector('#stripe-checkout')
+
+    pay_now_button.addEventListener('click', event =>{
+        stripe_public_key.redirectToCheckout({
+            sessionId: '{{ session_id }}'
+        }).then(function(result){
+
+        });
+    })
+
+  </script>
+
+{% include 'subscibe.html' %} 
+
+{% endblock content %}

@@ -39,8 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'chuch',
+    'joinus',
     'tinymce',
     'crispy_forms',
+    'donate',
+    
 ]
 
 CRISPY_TEMPLATE_PACK = 'Bootstrap4'
@@ -56,6 +59,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'church.urls'
+SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
 
 TEMPLATES = [
     {
@@ -163,3 +167,19 @@ TINYMCE_DEFAULT_CONFIG = {
     'menubar': True,
     'statusbar': True,
 }
+
+# sending emails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = ("mikimseff@gmail.com")
+EMAIL_HOST_PASSWORD = ("utrmpbtwakefcnfl")
+
+# STRIPE public key
+
+STRIPE_PUBLIC_KEY = 'pk_test_51M4JpaIofUzrj7LoGw19RjAiGYiNolgInqtBiKY2GdB7QEt0T0HzgP4bgoavAxY6vCjQkoSDTnIrLEppzwXWXJ7B004gF2XOQ1'
+
+# STRIPE private key
+
+STRIPE_PRIVATE_KEY = 'sk_test_51M4JpaIofUzrj7LoKus8mW2JuHpYyVsIRlhGzx2vERDvMsNYqZZJIsyjE7dEWQTXOT5v0R02ZpnLzzOZ1g9JfzXi008JZVMsNS'

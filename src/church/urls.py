@@ -23,16 +23,20 @@ from chuch.views import RegisterView
 
 from chuch.views import (
     index, events, sermons, sermon_detail,
-    event_detail, register_page, login_page, logoutUser, youth_page,
+    event_detail, login_page, logoutUser, youth_page,
     sermon_create, sermon_update, sermon_delete, event_create, aboutPage, contantPage,
-    men_page, women_page, children_page, bible_study, midweek_study, morning_devotion
+    men_page, women_page, children_page, bible_study, midweek_study, morning_devotion,
+    join_us, AppointmentTemplateView, ManageAppointmentTemplateView, my_donation_page,
+    payment_succesful, payment_failed
     # event_create, event_update, event_delete
 
 )
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
+    path('join_us/', views.join_us, name="join-us"),
     path('register/', RegisterView.as_view(), name="register"),
     # path('register/', views.register_page, name="register"),
     path('login/', views.login_page, name="login"),
@@ -56,8 +60,15 @@ urlpatterns = [
     path('event/<id>/delete/', views.event_delete, name='event-delete'),
     path('about/', views.aboutPage, name='about'),
     path('contact/', views.contantPage, name='contact'),
+    path("appointments/", AppointmentTemplateView.as_view(), name="appointment"),
+    path("manage-appointments/", ManageAppointmentTemplateView.as_view(), name="manage-appointments"),
     path('tinymce/', include('tinymce.urls')),
+    path('donate/', views.my_donation_page, name='donate'),
+    path('payment_success/', views.payment_succesful, name='payment-succesful'),
+    path('payment_failed/', views.payment_failed, name='payment-failed'),
 ]
+   
+
 
 
 if settings.DEBUG:

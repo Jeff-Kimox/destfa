@@ -1,10 +1,24 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic 
+from django.views.generic.base import TemplateView
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Sermon, Event, User, Message
+from .models import Sermon, Event, User, Message, Appointment
 from .forms import CustomUserCreationForm, SermonForm, EventForm
+from joinus.models import JoinUs
+from django.views.generic import ListView
+from django.conf import settings
+from donate.models import Donation
+import datetime
+from django.template import Context
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string, get_template
+
+
+
+import stripe
 
 # Create your views here.
 
@@ -12,10 +26,14 @@ from .forms import CustomUserCreationForm, SermonForm, EventForm
 class RegisterView(generic.CreateView):
     template_name = "register.html"
     form_class = CustomUserCreationForm
-
-    def get_success_url(self):
-        return reverse("login")
-
+     
+    if form_class.is_valid:
+        def get_success_url(self):
+            return reverse("login")
+        
+    else:
+        messages.error(request, 'An error occured during registration')
+   
 
 def register_page(request):
     form = CustomUserCreationForm()
@@ -75,6 +93,13 @@ def logoutUser(request):
 def index(request):
     queryset = Sermon.objects.filter(featured=True)
     events = Event.objects.filter(featured=True)
+
+    if request.method == "POST":
+        email = request.POST["email"]
+        new_signup = JoinUs()
+        new_signup.email = email
+        new_signup.save()
+
     context = {
         'object_list': queryset,
         'events': events,
@@ -166,6 +191,12 @@ def events(request):
     page_request_var = 'page'
     page = request.GET.get(page_request_var)
 
+    if request.method == "POST":
+        email = request.POST["email"]
+        new_signup = JoinUs()
+        new_signup.email = email
+        new_signup.save()
+
     try:
         paginated_queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -186,6 +217,12 @@ def sermons(request):
     paginator = Paginator(sermons, 4)
     page_request_var = 'page'
     page = request.GET.get(page_request_var)
+
+    if request.method == "POST":
+        email = request.POST["email"]
+        new_signup = JoinUs()
+        new_signup.email = email
+        new_signup.save()
 
     try:
         paginated_queryset = paginator.page(page)
@@ -381,11 +418,144 @@ def event_delete(request, id):
     return redirect(reverse("events"))
    
 
+def join_us(request):
+    if request.method == "POST":
+        email = request.POST["email"]
+        new_signup = JoinUs()
+        new_signup.email = email
+        new_signup.save()
+
+    return render(request, 'subscibe.html')
+
+
 def aboutPage(request):
+
+    if request.method == "POST":
+        email = request.POST["email"]
+        new_signup = JoinUs()
+        new_signup.email = email
+        new_signup.save()
+
     return render(request, "about.html")
+
+
+class AppointmentTemplateView(TemplateView):
+    template_name = "appointment.html"
+
+    def post(self, request):
+        fname = request.POST.get("fname")
+        lname = request.POST.get("lname")
+        email = request.POST.get("email")
+        mobile = request.POST.get("mobile")
+        message = request.POST.get("request")
+
+        appointment = Appointment.objects.create(
+            first_name = fname,
+            last_name =  lname,
+            email = email,
+            phone = mobile,
+            message = message,
+        )
+
+        appointment.save()
+
+        messages.add_message(request, messages.SUCCESS, f"Thanks {fname} for making an appointment")
+        return HttpResponseRedirect(request.path)
+
+
+
+class ManageAppointmentTemplateView(ListView):
+    template_name = "manage-appointments.html"
+    model = Appointment
+    context_object_name = "appointments"
+    login_required = True
+    paginate_by = 3
+
+    def post(self, request):
+        date = request.POST.get("date")
+        appointment_id = request.POST.get("appointment-id")
+        appointment = Appointment.objects.get(id=appointment_id)
+        appointment.accepted = True
+        appointment.accepted_date = datetime.datetime.now()
+        appointment.save()
+
+        data = {
+            "fname":appointment.first_name,
+            "date":date,
+        }
+
+        message = get_template('email.html').render(data)
+        email = EmailMessage(
+            "About your appointment",
+            message,
+            settings.EMAIL_HOST_USER,
+            [appointment.email]
+        )
+        email.content_subtype = "html"
+        email.send()
+
+        messages.add_message(request, messages.SUCCESS, f"You have accepted the appointment of {appointment.first_name}")
+        return HttpResponseRedirect(request.path)
+
+    def get_context_data(self, *args, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        appointments = Appointment.objects.all()
+
+        context.update({
+            "title": "Manage Appointments"
+        })
+        return context
+
+
 
 def contantPage(request):
     return render(request, "contact.html")
+
+
+
+# Payment
+
+def my_donation_page(request):
+    stripe.api_key = settings.STRIPE_PRIVATE_KEY
+
+    session = stripe.checkout.Session.create(
+        line_items=[{
+            'price': 'price_1METjjIofUzrj7LoZheoAk0u',
+            'quantity': 1,
+        }],
+        mode='payment',
+
+        success_url= request.build_absolute_uri(reverse('payment-succesful')) + '?session_id={CHECKOUT_SESSION_ID}',
+
+        cancel_url= request.build_absolute_uri(reverse('payment-failed'))
+    )
+
+
+    donation = Donation.objects.get(id=1)
+    context = {
+        'donation':donation,
+        'session_id': session.id,
+        'stripe_public_key':settings.STRIPE_PUBLIC_KEY,
+    }
+    return render(request, 'donate.html', context=context)
+
+def payment_succesful(request):
+    pass
+    # context = {
+        
+    # }
+    return render(request, 'payment_success.html')
+
+def payment_failed(request):
+    pass
+    # context = {
+
+    # }
+    return render(request, 'payment_failed.html')
+
+
+
+
 
 # def events(request):
 #     events = Event.objects.filter(featured=True)

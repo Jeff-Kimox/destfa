@@ -34,3 +34,8 @@ class EventForm(forms.ModelForm):
         model = Event
         fields = ['title', 'date', 'location', 'time', 'overview', 'categories', 'featured',
         'thumbnail']
+
+# class JoinUsForm(forms.ModelForm):
+#     class Meta:
+#         model = Event
+#         fields = '__all__'
